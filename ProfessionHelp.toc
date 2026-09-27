@@ -1,0 +1,17 @@
+## Interface: 30300
+## Title: Profession Help
+## Notes: All WotLK professions: leveling, training maps, materials and Auctionator prices.
+## Author: Profession Help
+## Version: 0.3.1-alpha
+## OptionalDeps: Auctionator
+## SavedVariables: ProfessionHelpDB
+## SavedVariablesPerCharacter: ProfessionHelpCharDB
+Data.lua
+Professions.lua
+Components.lua
+MoreProfessions.lua
+Core.lua
+Map.lua
+UI.lua
+Tooltips.lua
+Minimap.lua
