@@ -66,6 +66,8 @@ Updating? Replace the previous addon folder. Keep your SavedVariables to retain 
 
 ## Preview
 
+[Browse all six gameplay screenshots](media/README.md), including Engineering and Tailoring at 450 and the Fishing guide.
+
 [Watch or download the short gameplay preview](https://github.com/sobata1995-source/ProfessionHelp/releases/download/v0.3.1-alpha/profession-preview.mp4).
 
 The screenshots and preview demonstrate the interface; earlier captures may not show the latest Refresh feedback.
