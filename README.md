@@ -5,6 +5,7 @@
 A profession companion for **World of Warcraft 3.3.5a**, built around leveling on **Warmane Icecrown**. Follow your next step without constantly switching between the game and a guide.
 
 [![Download beta](https://img.shields.io/badge/Download-v0.3.2--beta-d9ad48?style=for-the-badge)](https://github.com/sobata1995-source/ProfessionHelp/releases/tag/v0.3.2-beta)
+[![Support on Patreon](https://img.shields.io/badge/Support-Patreon-FF424D?style=for-the-badge)](https://www.patreon.com/c/DenisAleksandrov/membership)
 [![Tip via Revolut](https://img.shields.io/badge/Support%20development-Revolut-191c25?style=for-the-badge)](https://revolut.me/denisar2z)
 
 ![Engineering guide with craft estimates and material counts](media/engineering.png)
@@ -44,7 +45,7 @@ Missing a recipe or reaching your skill cap? Check the TRAINING card. For suppor
 
 ## Install in a minute
 
-1. Download **ProfessionHelp-0.3.1-alpha.zip** from [Releases](https://github.com/sobata1995-source/ProfessionHelp/releases/tag/v0.3.2-beta). Choose the addon ZIP, not GitHub's automatically generated source archive.
+1. Download the **v0.3.2-beta addon ZIP** from [Releases](https://github.com/sobata1995-source/ProfessionHelp/releases/tag/v0.3.2-beta). Choose the addon ZIP, not GitHub's automatically generated source archive.
 2. Close WoW completely.
 3. Extract the **ProfessionHelp** folder into `World of Warcraft/Interface/AddOns/`.
 4. Check that the path ends in `Interface/AddOns/ProfessionHelp/ProfessionHelp.toc`.
@@ -93,11 +94,11 @@ Lua 5.1 checks cover guide rendering, recipe isolation, saved-data migration, ma
 
 ## Support development
 
-Profession Help is free to use. If it saves you time and you would like to support updates, you can leave an optional tip:
+Support ongoing development on [Patreon](https://www.patreon.com/c/DenisAleksandrov/membership), join the [Razer Dev Studio Discord](https://discord.gg/Pr5eMAUqt), or browse [my CurseForge addons](https://www.curseforge.com/members/sobstven/projects).
 
-[![Leave a tip on Revolut](https://img.shields.io/badge/Leave%20a%20tip-Revolut-191c25?style=for-the-badge)](https://revolut.me/denisar2z)
+The addon is free to download and use. Patreon support is optional and helps fund development and updates. Custom development is quoted separately; membership does not include individual tasks or guarantee implementation of suggestions. Feedback and testing are welcome too.
 
-Feedback and testing are welcome too.
+You can also [leave a one-time tip via Revolut](https://revolut.me/denisar2z).
 
 ## Guide references
 
