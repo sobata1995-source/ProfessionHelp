@@ -1,4 +1,4 @@
-ProfessionHelp = { version = "0.3.1-alpha", recipes = {}, pins = {} }
+ProfessionHelp = { version = "0.3.2-beta", recipes = {}, pins = {} }
 local P = ProfessionHelp
 -- Reference facts: Wowhead WotLK Engineering leveling/recipes guides.
 -- Ranges are suggestions, not promises of skill-ups. Reagents come from the client.

@@ -26,12 +26,13 @@ f:SetScript("OnDragStop",function(self) self:StopMovingOrSizing() end)
 f:Hide()
 tinsert(UISpecialFrames,"ProfessionHelpFrame")
 local close=CreateFrame("Button",nil,f,"UIPanelCloseButton");close:SetPoint("TOPRIGHT",-4,-4)
+local rateMenu
 local title=text(f,20);title:SetPoint("TOPLEFT",20,-18);title:SetWidth(600)
 local professionMenu=CreateFrame("Frame",nil,f)
 professionMenu:SetWidth(356);professionMenu:SetHeight(214);professionMenu:SetPoint("TOPRIGHT",-20,-46)
 professionMenu:SetFrameLevel(f:GetFrameLevel()+30);professionMenu:SetBackdrop(boxStyle)
 professionMenu:SetBackdropColor(0.035,0.05,0.085,1);professionMenu:Hide()
-local choose=button(f,"Profession",110,25,function() if professionMenu:IsShown() then professionMenu:Hide() else professionMenu:Show() end end)
+local choose=button(f,"Profession",110,25,function() if rateMenu then rateMenu:Hide() end; if professionMenu:IsShown() then professionMenu:Hide() else professionMenu:Show() end end)
 choose:SetPoint("TOPRIGHT",-32,-18)
 for i,key in ipairs(P.professionOrder) do
  local name=key
@@ -42,6 +43,30 @@ for i,key in ipairs(P.professionOrder) do
  b:SetPoint("TOPLEFT",10+math.floor((i-1)/7)*175,-10-((i-1)%7)*28)
 end
 local status=text(f,11);status:SetPoint("TOPLEFT",20,-48);status:SetWidth(735);status:SetHeight(36)
+-- A small dropdown built from 3.3.5-compatible frames, matching the profession menu.
+local rateButton=button(f,"Skill rate: x3",140,25,function()
+ professionMenu:Hide()
+ if rateMenu:IsShown() then rateMenu:Hide() else rateMenu:Show() end
+end)
+rateButton:SetPoint("TOPRIGHT",-32,-48)
+P.rateButton=rateButton
+rateMenu=CreateFrame("Frame",nil,f)
+rateMenu:SetWidth(140);rateMenu:SetHeight(128)
+rateMenu:SetPoint("TOPRIGHT",-32,-75)
+rateMenu:SetFrameLevel(f:GetFrameLevel()+40);rateMenu:SetBackdrop(boxStyle)
+rateMenu:SetBackdropColor(0.035,0.05,0.085,1);rateMenu:EnableMouse(true);rateMenu:Hide()
+P.rateMenu=rateMenu
+P.rateOptions={}
+for i,value in ipairs(P.skillRates) do
+ local rate=value
+ local option=button(rateMenu,"x"..rate,120,25,function()
+  rateMenu:Hide();P.SetSkillRate(rate)
+ end)
+ option:SetPoint("TOPLEFT",10,-8-(i-1)*28)
+ P.rateOptions[rate]=option
+end
+f:HookScript("OnHide",function() rateMenu:Hide();professionMenu:Hide() end)
+status:SetWidth(570)
 P.tab="Leveling"
 for i,label in ipairs({"Leveling","Recipes","Vendors"}) do
  local tab=label
@@ -210,6 +235,10 @@ local function recipeBody(entry)
 end
 function P.Refresh()
  if not P.ready then return end
+ rateButton:SetText("Skill rate: x"..P.SkillRate().."  v")
+ for rate,option in pairs(P.rateOptions) do
+  option:SetText((rate==P.SkillRate() and "> " or "").."x"..rate)
+ end
  local rank,cap=P.Skill()
  title:SetText("PROFESSION HELP  |cff6ecbff"..P.active.."|r")
  P.plannedCrafts=P.PlanCrafts()

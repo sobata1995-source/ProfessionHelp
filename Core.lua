@@ -1,8 +1,26 @@
 local P = ProfessionHelp
 P.batch = 1
 P.follow = true
+P.skillRates={1,2,3,7}
+local function validRate(value)
+ for _,rate in ipairs(P.skillRates) do if value==rate then return true end end
+ return false
+end
 function P.SkillRate()
- return 3
+ local rate=ProfessionHelpCharDB and tonumber(ProfessionHelpCharDB.skillRate)
+ return validRate(rate) and rate or 3
+end
+function P.SetSkillRate(value)
+ local rate=tonumber(value)
+ if not P.ready or not validRate(rate) then return false end
+ if rate==P.SkillRate() then return true end
+ ProfessionHelpCharDB.skillRate=rate
+ -- Recalculate the selected step, including reserved components and materials.
+ P.manualBatch=false
+ P.batchRecipe=nil
+ P.dirty=true
+ if P.Refresh then P.Refresh() end
+ return true
 end
 function P.PlanCrafts()
  local counts,needed,order={},{},{}
@@ -217,6 +235,7 @@ function P.Initialize()
  if ProfessionHelpDB.auto==nil then ProfessionHelpDB.auto=true end
  if ProfessionHelpDB.mapPins==nil then ProfessionHelpDB.mapPins=true end
  ProfessionHelpCharDB=ProfessionHelpCharDB or {}
+ ProfessionHelpCharDB.skillRate=P.SkillRate()
  ProfessionHelpCharDB.vendor=ProfessionHelpCharDB.vendor or {}
  ProfessionHelpCharDB.recipes=ProfessionHelpCharDB.recipes or {}
  ProfessionHelpCharDB.learnedNames=ProfessionHelpCharDB.learnedNames or {}

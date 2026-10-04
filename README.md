@@ -4,17 +4,21 @@
 
 A profession companion for **World of Warcraft 3.3.5a**, built around leveling on **Warmane Icecrown**. Follow your next step without constantly switching between the game and a guide.
 
-[![Download alpha](https://img.shields.io/badge/Download-v0.3.1--alpha-d9ad48?style=for-the-badge)](https://github.com/sobata1995-source/ProfessionHelp/releases/tag/v0.3.1-alpha)
+[![Download beta](https://img.shields.io/badge/Download-v0.3.2--beta-d9ad48?style=for-the-badge)](https://github.com/sobata1995-source/ProfessionHelp/releases/tag/v0.3.2-beta)
 [![Tip via Revolut](https://img.shields.io/badge/Support%20development-Revolut-191c25?style=for-the-badge)](https://revolut.me/denisar2z)
 
 ![Engineering guide with craft estimates and material counts](media/engineering.png)
+
+## New in 0.3.2-beta
+
+Choose **x1, x2, x3 or x7** from the **Skill rate** dropdown below Profession. The setting is saved per character and applies to all their professions. Existing characters default to x3. Changing it immediately recalculates craft and material estimates, including components reserved for later recipes, and resets a manual craft quantity to the new recommendation. It changes guide estimates, not your server settings.
 
 ## Your profession, one step at a time
 
 | Question | Profession Help shows you |
 | --- | --- |
 | What should I craft? | A leveling route from 1 to 450 and the current skill range. |
-| How many crafts? | Whole-step estimates tuned for **x3 profession skill gains**, with reserves for later components. |
+| How many crafts? | Whole-step estimates tuned for **x1, x2, x3 or x7 profession skill gains**, with reserves for later components. |
 | What materials do I need? | Reagents from your learned recipes, quantities in your bags and what is missing. |
 | Should I keep this? | KEEP / USE / SELL guidance for route components and finished items. |
 | Do I need training? | Recipe and rank reminders, with **Show on map inside TRAINING** for catalogued trainers. |
@@ -40,7 +44,7 @@ Missing a recipe or reaching your skill cap? Check the TRAINING card. For suppor
 
 ## Install in a minute
 
-1. Download **ProfessionHelp-0.3.1-alpha.zip** from [Releases](https://github.com/sobata1995-source/ProfessionHelp/releases/tag/v0.3.1-alpha). Choose the addon ZIP, not GitHub's automatically generated source archive.
+1. Download **ProfessionHelp-0.3.1-alpha.zip** from [Releases](https://github.com/sobata1995-source/ProfessionHelp/releases/tag/v0.3.2-beta). Choose the addon ZIP, not GitHub's automatically generated source archive.
 2. Close WoW completely.
 3. Extract the **ProfessionHelp** folder into `World of Warcraft/Interface/AddOns/`.
 4. Check that the path ends in `Interface/AddOns/ProfessionHelp/ProfessionHelp.toc`.
@@ -74,8 +78,8 @@ The screenshots and preview demonstrate the interface; earlier captures may not 
 
 ## Before you start
 
-- **Alpha release:** built for the original **3.3.5a English client (Interface 30300)**. Retail and modern Classic clients are not supported by this release.
-- **x3 estimates:** craft counts cover the whole step, not the remaining crafts from your exact skill. Yellow/green recipes can require extra attempts. Keep quantities can exceed the crafts needed just for skill. Cooking counts are approximate.
+- **Beta release:** built for the original **3.3.5a English client (Interface 30300)**. Retail and modern Classic clients are not supported by this release.
+- **Selectable skill-rate estimates:** craft counts cover the whole step, not the remaining crafts from your exact skill. Yellow/green recipes can require extra attempts. Keep quantities can exceed the crafts needed just for skill. Cooking counts are approximate.
 - **Learned recipe data:** open your profession, clear filters and expand categories to load reagents. Unscanned recipes do not have invented material lists.
 - **A growing catalogue:** all professions have leveling routes, but this is not a complete database of every recipe, trainer or vendor. A Dalaran trainer is used where no local trainer is catalogued.
 - **Prices need data:** Auctionator integration is optional. Unknown prices remain unknown; Refresh does not run a new auction scan. Recorded prices may be out of date.

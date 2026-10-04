@@ -3,3 +3,4 @@ enable-nolib-creation: no
 ignore:
   - media
   - AUTOMATIC-RELEASES.md
+  - tests
