@@ -2,7 +2,7 @@
 ## Title: Profession Help
 ## Notes: All WotLK professions: leveling, training maps, materials and Auctionator prices.
 ## Author: Profession Help
-## Version: 0.3.2-beta
+## Version: 0.3.3-beta1
 ## OptionalDeps: Auctionator
 ## SavedVariables: ProfessionHelpDB
 ## SavedVariablesPerCharacter: ProfessionHelpCharDB

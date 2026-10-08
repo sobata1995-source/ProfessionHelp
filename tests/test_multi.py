@@ -73,7 +73,7 @@ function ShowUIPanel(f) f:Show() end
 ''')
 
 
-root = Path(__file__).resolve().parents[1] 
+root = Path(__file__).resolve().parents[1]
 for f in root.glob('*.lua'):
     lua.execute("assert(loadstring(...))", f.read_text(encoding='utf-8'))
 for name in ['Data.lua','Professions.lua','Components.lua','MoreProfessions.lua','Core.lua','Map.lua','UI.lua','Tooltips.lua']:
@@ -88,7 +88,7 @@ lua.execute(r'''
 local P=ProfessionHelp
 ProfessionHelpCharDB={recipes={Legacy={name='Legacy'}},learnedNames={Legacy=true},lastRank=1}
 P.Initialize()
-local event=function(e) P.events.scripts.OnEvent(P.events,e) end
+local event=function(e) P.events.scripts.OnEvent(P.events,e);P.events.scripts.OnUpdate(P.events,0.4) end
 assert(#P.professionOrder==14)
 assert(P.recipes.Legacy and P.learnedNames.Legacy)
 P.frame:Hide();event('PLAYER_LOGIN');assert(not P.frame:IsShown())

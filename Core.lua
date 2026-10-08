@@ -181,7 +181,7 @@ function P.Cost(recipe,batch)
  end
  return total,missing,unknown,rows
 end
-function P.ScanRecipes()
+local function scanRecipes()
  local key=P.ProfessionFromTrade()
  if not key then return end
  local db=P.ProfessionDB(key)
@@ -206,6 +206,18 @@ function P.ScanRecipes()
   end
  end
  if key==P.active then P.visibleRecipes=current end
+end
+-- API hooks in other trade-skill addons may emit updates during these reads.
+function P.ScanRecipes()
+ if P.scanning then return false end
+ P.scanning=true
+ local ok,err=pcall(scanRecipes)
+ P.scanning=false
+ if not ok then
+  if geterrorhandler then geterrorhandler()(err) end
+  return false
+ end
+ return true
 end
 function P.ObserveMerchant()
  if not ProfessionHelpCharDB then return end
@@ -249,19 +261,17 @@ function P.Initialize()
 end
 local events=CreateFrame("Frame")
 P.events=events
-for _,e in ipairs({"ADDON_LOADED","PLAYER_LOGIN","SKILL_LINES_CHANGED","TRADE_SKILL_SHOW","TRADE_SKILL_UPDATE","BAG_UPDATE","MERCHANT_SHOW","MERCHANT_UPDATE","MERCHANT_CLOSED"}) do events:RegisterEvent(e) end
+for _,e in ipairs({"ADDON_LOADED","PLAYER_LOGIN","SKILL_LINES_CHANGED","TRADE_SKILL_SHOW","TRADE_SKILL_UPDATE","TRADE_SKILL_CLOSE","BAG_UPDATE","MERCHANT_SHOW","MERCHANT_UPDATE","MERCHANT_CLOSED"}) do events:RegisterEvent(e) end
 events:SetScript("OnEvent",function(_,event,arg)
  if event=="ADDON_LOADED" and arg=="ProfessionHelp" then P.Initialize() end
  if not P.ready then return end
  if event=="MERCHANT_SHOW" or event=="MERCHANT_UPDATE" then P.ObserveMerchant() end
+ if event=="TRADE_SKILL_CLOSE" then P.scanPending=false;P.showPending=false end
  if event=="TRADE_SKILL_SHOW" or event=="TRADE_SKILL_UPDATE" then
-  local key=P.ProfessionFromTrade()
-  if event=="TRADE_SKILL_SHOW" and key and key~=P.active then P.UseProfession(key) end
-  P.ScanRecipes()
-  if event=="TRADE_SKILL_SHOW" and key and ProfessionHelpDB.auto then
-   local rank=P.Skill()
-   if rank>0 and rank<450 then P.Show() end
-  end
+  -- Coalesce bursts outside the event handler, without a scan/update loop.
+  if P.scanning then return end
+  P.scanPending=true
+  if event=="TRADE_SKILL_SHOW" then P.showPending=true end
  end
  if event=="PLAYER_LOGIN" or event=="SKILL_LINES_CHANGED" then
   for _,key in ipairs(P.professionOrder) do
@@ -284,6 +294,20 @@ events:SetScript("OnUpdate",function(self,elapsed)
  self.elapsed=(self.elapsed or 0)+elapsed
  if self.elapsed<0.4 then return end
  self.elapsed=0
+ if P.scanPending then
+  local show=P.showPending
+  P.scanPending=false;P.showPending=false
+  local key=P.ProfessionFromTrade()
+  if key then
+   if show and key~=P.active then P.UseProfession(key) end
+   P.ScanRecipes()
+   P.dirty=true
+   if show and ProfessionHelpDB.auto then
+    local rank=P.Skill(key)
+    if rank>0 and rank<450 then P.Show();P.dirty=false end
+   end
+  end
+ end
  if P.dirty and P.frame and P.frame:IsShown() then P.dirty=false; P.Refresh() end
 end)
 SLASH_PROFESSIONHELP1="/ph"
